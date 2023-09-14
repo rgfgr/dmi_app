@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="dmi_app.MainPage"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
+    <Grid RowDefinitions="1*, 6*" RowSpacing="6" ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="5" BackgroundColor="#1CADDE" Padding="5">
+        <Button Text="Get map data" Clicked="Get_data_Button_Clicked" x:Name="get_map_data" BorderWidth="0"/>
+        <Border Grid.Column="1" VerticalOptions="Fill" BackgroundColor="Cyan" Stroke="Red" StrokeThickness="3" StrokeShape="RoundRectangle 40" HorizontalOptions="Fill">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="From" HorizontalTextAlignment="Center" />
+                <DatePicker x:Name="fromDate" Date="01/01/2022" />
+            </VerticalStackLayout>
+        </Border>
+        <Border Grid.Column="2" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Cyan" Stroke="Red" StrokeThickness="3" StrokeShape="RoundRectangle 40">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="10">
+                <Label Text="To and including" />
+                <DatePicker x:Name="toDate" Date="12/31/2022" />
+            </VerticalStackLayout>
+        </Border>
+        <Border Grid.Column="3" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Cyan" Stroke="Red" StrokeThickness="3" StrokeShape="RoundRectangle 40">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="15">
+                <Label Text="Observations per iteration" HorizontalTextAlignment="Center" />
+                <Slider Minimum="1" Maximum="300" x:Name="observations_slider" Value="300" ValueChanged="Observations_slider_ValueChanged" />
+                <Editor Text="300" TextChanged="Observations_editor_TextChanged" x:Name="observations_editor" HorizontalTextAlignment="Center" HorizontalOptions="Center" Keyboard="Numeric" VerticalOptions="Center" VerticalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </Border>
+        <Border Grid.Column="4" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Cyan" Stroke="Red" StrokeThickness="3" StrokeShape="RoundRectangle 40,40,40,40">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="15">
+                <Label Text="Iterations" HorizontalTextAlignment="Center"/>
+                <Slider Minimum="1" Maximum="300" x:Name="iterations_slider" Value="10" ValueChanged="Iterations_slider_ValueChanged" />
+                <Editor Text="10" TextChanged="Iterations_editor_TextChanged" x:Name="iterations_editor" HorizontalTextAlignment="Center" HorizontalOptions="Center" Keyboard="Numeric" VerticalOptions="Center" VerticalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </Border>
+        <Border Grid.Column="5" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Cyan" Stroke="Red" StrokeThickness="3" StrokeShape="RoundRectangle 40,40,40,40">
+            <VerticalStackLayout  HorizontalOptions="Center" VerticalOptions="Center" Padding="15">
+                <Label Text="Year only" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                <CheckBox x:Name="yr_ol" IsChecked="True" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
+        <Border Grid.Column="6" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Cyan" Stroke="Red" StrokeThickness="3" StrokeShape="RoundRectangle 40,40,40,40">
+            <Label Text="Doing fine" x:Name="error" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Padding="0" HorizontalOptions="Fill" VerticalOptions="Fill" FontAutoScalingEnabled="True" />
+        </Border>
+        <Border Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="1"
+                    Stroke="Red" StrokeThickness="3" StrokeShape="RoundRectangle 40,40,40,40" BackgroundColor="#963535">
+            <maps:Map x:Name="myMap">
+                <x:Arguments>
+                    <MapSpan>
+                        <x:Arguments>
+                            <sensors:Location>
+                                <x:Arguments>
+                                    <x:Double>55</x:Double>
+                                    <x:Double>9</x:Double>
+                                </x:Arguments>
+                            </sensors:Location>
+                            <x:Double>0.1</x:Double>
+                            <x:Double>0.1</x:Double>
+                        </x:Arguments>
+                    </MapSpan>
+                </x:Arguments>
+            </maps:Map>
+        </Border>
+    </Grid>
+</ContentPage>
