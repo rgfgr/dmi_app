@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using Microsoft.Maui.Controls.Maps;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Globalization;
 
 namespace dmi_app
 {

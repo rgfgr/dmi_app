@@ -1,6 +1,5 @@
 ﻿using dmi_app.GeoJson;
 using dmi_app.HttpStuff;
-using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Maps;
 using System.Globalization;
 using System.Text;

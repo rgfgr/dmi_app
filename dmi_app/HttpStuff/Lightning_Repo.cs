@@ -5,7 +5,7 @@ namespace dmi_app.HttpStuff
     public class Lightning_Repo
     {
         private static readonly string api_url = "v2/lightningdata/collections";
-        private static readonly string _apiKey = "848f7c09-b2a2-4438-ae75-f1b6944b0847";
+        private static readonly string _apiKey = Class1.Api_key;
 
         public async Task<FeatureCollection> GetObservationsAsync(Dictionary<string, object> parameters = null)
         {

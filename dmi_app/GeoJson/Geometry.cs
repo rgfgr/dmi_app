@@ -1,6 +1,6 @@
-using Newtonsoft.Json; 
-using System.Collections.Generic; 
-namespace dmi_app.GeoJson{ 
+using Newtonsoft.Json;
+namespace dmi_app.GeoJson
+{
 
     public class Geometry
     {
