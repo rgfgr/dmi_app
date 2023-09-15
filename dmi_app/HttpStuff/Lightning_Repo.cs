@@ -1,30 +1,40 @@
-﻿using dmi_app.GeoJson;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using dmi_app.GeoJson;
 
 namespace dmi_app.HttpStuff
 {
-    public class Lightning_Repo
+    public static class Lightning_Repo
     {
-        private static readonly string api_url = "v2/lightningdata/collections";
-        private static readonly string _apiKey = Class1.Api_key;
+        private static readonly SecretClient client = new(new(Environment.GetEnvironmentVariable("VaultUri")), new DefaultAzureCredential());
 
-        public async Task<FeatureCollection> GetObservationsAsync(Dictionary<string, object> parameters = null)
+        public static async Task<FeatureCollection> GetObservationsAsync(Dictionary<string, object> parameters = null)
         {
-            return await DMI_Caller.GetFeatureCollectionAsync($"{api_url}/observation", _apiKey, parameters);
+            var (apiKey, apiUrl) = await GetKeyAndUrlAsync();
+            return await DMI_Caller.GetFeatureCollectionAsync($"{apiUrl}/observation", apiKey, parameters);
         }
 
-        public async Task<FeatureCollection> GetObservationsWithBuiltUrlAsync(string apiUrl)
+        public static async Task<FeatureCollection> GetObservationsWithBuiltUrlAsync(string apiUrl)
         {
             return await DMI_Caller.GetFeatureCollectionWithBuiltUrlAsync(apiUrl);
         }
 
-        public async Task<string> GetObservationsJsonAsync(Dictionary<string, object> parameters = null)
+        public static async Task<string> GetObservationsJsonAsync(Dictionary<string, object> parameters = null)
         {
-            return await DMI_Caller.GetJsonAsync($"{api_url}/observation", _apiKey, parameters);
+            var (apiKey, apiUrl) = await GetKeyAndUrlAsync();
+            return await DMI_Caller.GetJsonAsync($"{apiUrl}/observation", apiKey, parameters);
         }
 
-        public async Task<string> GetObservationsJsonWithBuiltUrlAsync(string apiUrl)
+        public static async Task<string> GetObservationsJsonWithBuiltUrlAsync(string apiUrl)
         {
             return await DMI_Caller.GetJsonWithBuiltUrlAsync(apiUrl);
+        }
+
+        private static async Task<(string, string)> GetKeyAndUrlAsync()
+        {
+            var apiKey = await client.GetSecretAsync("Lightning-key");
+            var apiUrl = await client.GetSecretAsync("Lightning-url");
+            return (apiKey.Value.Value, apiUrl.Value.Value);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace dmi_app
 {
     public partial class MainPage : ContentPage
     {
-        readonly Lightning_Repo repo = new();
         private const double lon1 = 7.0;
         private const double lat1 = 54.0;
         private const double lon2 = 16.0;
@@ -51,7 +50,7 @@ namespace dmi_app
                 {"bbox", $"{lon1.ToString(ci)},{lat1.ToString(ci)},{lon2.ToString(ci)},{lat2.ToString(ci)}"},
                 {"offset", "1000" },
             };
-            var curr_observations_task = repo.GetObservationsAsync(_params);
+            var curr_observations_task = Lightning_Repo.GetObservationsAsync(_params);
             error.Text = "Loading...";
             Reset_Map();
             var curr_observations = await curr_observations_task;
@@ -61,7 +60,7 @@ namespace dmi_app
                 var last = i == iterations;
                 if (!last)
                 {
-                    next_observations = repo.GetObservationsWithBuiltUrlAsync(curr_observations.Links[1].Href);
+                    next_observations = Lightning_Repo.GetObservationsWithBuiltUrlAsync(curr_observations.Links[1].Href);
                 }
                 foreach (var pin in LightningMapGenerator.GeneratePinData(curr_observations))
                 {

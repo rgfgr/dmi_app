@@ -362,3 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /dmi_app/Class1.cs
+/dmi_app/Properties/ServiceDependencies/local/secrets1.arm.json
+/dmi_app/Properties/serviceDependencies.local.json
+/dmi_app/Properties/serviceDependencies.json

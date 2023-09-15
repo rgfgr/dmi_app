@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
-namespace dmi_app.GeoJson{ 
+namespace dmi_app.GeoJson
+{
 
     public class Properties
     {
